@@ -100,5 +100,5 @@ docker build --tag="image-file-upload:latest" .
 ```
 ### docker run
 ```
-docker run -d -p 5000:5000 file_upload:latest
+docker run -d -p 5000:5000 image-file-upload:latest
 ```

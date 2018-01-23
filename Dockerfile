@@ -1,10 +1,11 @@
-FROM node:9.4.0-alpine
+FROM nikolaik/python-nodejs:latest
 
 COPY . /root
 
 WORKDIR /root
 
-RUN npm i --production
+RUN rm -rf node_modules && \
+    npm i --production
 
 EXPOSE 5000
 
