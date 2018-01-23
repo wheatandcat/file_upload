@@ -1,3 +1,20 @@
+# image-file-upload
+
+### info
+
+server that can upload and acquire image files
+
+### start
+```
+node server.js
+```
+
+open test image upload page
+ * http://localhost:5000/up.html
+
+### code
+
+```
 "use strict"
 
 const express = require("express")
@@ -11,9 +28,12 @@ const uuid = require("uuid/v1")
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(multer({ dest: "./tmp/" }).single("file"))
 
+/*
+// TODO: upload test page
 app.get("/up.html", (req, res) => {
   res.sendFile(__dirname + "/" + "up.html")
 })
+*/
 
 app.get("/images/:file", async (req, res) => {
   try {
@@ -52,3 +72,33 @@ app.post("/file_upload", async (req, res) => {
 })
 
 app.listen(5000)
+```
+
+### API
+
+#### POST http:localhost:5000/file_upload
+ * image Upload
+
+##### quey
+
+|name|Type|Description|
+|:---|:---|:---|
+|size|number|image size (default: 120px)|
+
+##### response
+
+|name|Type|Description|
+|:---|:---|:---|
+|filename|string|upload file name|
+
+#### GET http:localhost:5000/image/:fileName
+ * Acquire the uploaded image file
+
+### docker build
+```
+docker build --tag="image-file-upload:latest" .
+```
+### docker run
+```
+docker run -d -p 5000:5000 file_upload:latest
+```
